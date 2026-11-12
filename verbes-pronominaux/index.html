@@ -30,7 +30,7 @@ h1 span{color:var(--red)}
 h2{font-size:1.15rem}
 a{color:var(--blue);text-decoration:none;font-weight:700}
 header p{margin:4px 0 0;color:var(--muted)}
-.flag{display:inline-flex;height:.55em;vertical-align:.25em;margin-left:.3em;border-radius:3px;overflow:hidden}
+.flag{display:inline-flex;height:.55em;vertical-align:.25em;margin-left:.3em;border-radius:3px;overflow:hidden;border:1px solid var(--f-line)}
 .flag i{width:.45em;display:block}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 14px}
@@ -67,11 +67,20 @@ input[type=text]:focus{outline:none;border-color:var(--accent)}
 .downloads{display:flex;gap:10px;flex-wrap:wrap}
 .downloads a{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
 @media (prefers-reduced-motion:no-preference){.pop{animation:pop .25s ease-out}@keyframes pop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}}
+
+/* Fachfarbe (Français) – passend zur Startseite */
+:root{--f:#2f63d6;--f-soft:#f1f5ff;--f-line:#cfdcfb;--f-on:#ffffff}
+@media (prefers-color-scheme: dark){:root{--f:#6f9bff;--f-soft:#141c33;--f-line:#2f4579;--f-on:#111a2c}}
+body{background:var(--f-soft);border-top:8px solid var(--f)}
+.card,.stat{border-color:var(--f-line)}
+.tab{border-color:var(--f-line)}
+.tab[aria-pressed="true"]{background:var(--f);border-color:var(--f);color:var(--f-on)}
+.fach{display:inline-block;background:var(--f);color:var(--f-on);font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:3px 10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <nav><a href="../">← Alle Themen</a></nav>
+  <nav style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><a href="../">← Alle Themen</a><span class="fach">Français</span></nav>
   <header>
     <h1>Verbes <span>pronominaux</span><span class="flag" aria-hidden="true"><i style="background:#2f63d6"></i><i style="background:#fff"></i><i style="background:#e5484d"></i></span></h1>
     <p>Complète les phrases au passé composé.</p>
