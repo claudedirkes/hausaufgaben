@@ -81,7 +81,7 @@ header p{margin:4px 0 0;color:var(--muted)}
 </head>
 <body>
 <div class="wrap">
-  <nav class="top"><a href="../">← Alle Themen</a><a href="../statistik.html">Statistik</a></nav>
+  <nav class="top"><a href="../">← Alle Themen</a></nav>
   <header>
     <h1>Teilbar-<span>Trainer</span></h1>
     <p>Üb die Teilbarkeitsregeln. Jede Aufgabe ist neu – du kannst so lange üben, wie du willst.</p>
@@ -127,7 +127,6 @@ header p{margin:4px 0 0;color:var(--muted)}
   </section>
 </div>
 
-<script src="../config.js"></script>
 <script>
 const DIVS=[2,3,4,5,7,8,9,10,12,15,25];
 const RULES={
@@ -181,7 +180,6 @@ function pickNumber(d){
 const activeList=()=>[...active].sort((a,b)=>a-b);
 
 function score(ok){
-  if(window.HA_STATS)HA_STATS.log("teilbarkeit",mode,cur&&cur.label,ok);
   st.total++; if(ok){st.right++;st.streak++;st.best=Math.max(st.best,st.streak)} else st.streak=0;
   try{localStorage.setItem("tt-best",st.best)}catch(e){}
   $("sRight").textContent=st.right;$("sTotal").textContent=st.total;$("sStreak").textContent=st.streak;$("sBest").textContent=st.best;
