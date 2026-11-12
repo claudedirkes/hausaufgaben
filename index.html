@@ -25,13 +25,25 @@ h1{font-size:2.2rem;line-height:1.1}
 h1 span{color:var(--accent)}
 header p{margin:6px 0 0;color:var(--muted)}
 .topics{display:grid;gap:12px}
-.topic{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0}
+.topic{display:grid;gap:10px;background:var(--f-soft,var(--surface));border:1px solid var(--f-line,var(--line));border-top:6px solid var(--f,var(--line));border-radius:20px;padding:18px 20px 20px;min-width:0}
+/* Farbe pro Fach: data-fach="mathe|francais|deutsch|englisch|sciences" */
+.topic[data-fach="mathe"]   {--f:#f26b1d; --f-soft:#fff3ea; --f-line:#ffd9bf; --f-text:#b44a0c}
+.topic[data-fach="francais"]{--f:#2f63d6; --f-soft:#edf2ff; --f-line:#cfdcfb; --f-text:#2149a8}
+.topic[data-fach="deutsch"] {--f:#c0392b; --f-soft:#fdeeec; --f-line:#f5cdc8; --f-text:#962c21}
+.topic[data-fach="englisch"]{--f:#7b4bd1; --f-soft:#f4effd; --f-line:#ded0f7; --f-text:#5d34a8}
+.topic[data-fach="sciences"]{--f:#1f9d63; --f-soft:#eaf8f0; --f-line:#c4ebd6; --f-text:#16774a}
+@media (prefers-color-scheme: dark){
+.topic[data-fach="mathe"]   {--f:#ff8f3d; --f-soft:#2b2220; --f-line:#5a3b26; --f-text:#ffb27d}
+.topic[data-fach="francais"]{--f:#6f9bff; --f-soft:#1b2747; --f-line:#2f4579; --f-text:#a9c2ff}
+.topic[data-fach="deutsch"] {--f:#ff7b6b; --f-soft:#2d1f26; --f-line:#5e2f2c; --f-text:#ffaea4}
+.topic[data-fach="englisch"]{--f:#b18cff; --f-soft:#251f3d; --f-line:#463673; --f-text:#cdb6ff}
+.topic[data-fach="sciences"]{--f:#4fd398; --f-soft:#16302a; --f-line:#24533f; --f-text:#8ce6bc}}
 .topic h2{font-size:1.4rem}
 .topic p{margin:0;color:var(--muted)}
-.tag{justify-self:start;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--tag);border-radius:999px;padding:3px 10px}
+.tag{justify-self:start;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:var(--f,var(--tag));color:var(--surface);border-radius:999px;padding:3px 10px}
 .links{display:flex;gap:8px;flex-wrap:wrap}
-.links a{text-decoration:none;font-weight:700;border-radius:12px;padding:10px 14px;border:1px solid var(--line);color:var(--blue)}
-.links a.main{background:var(--accent);border-color:var(--accent);color:#1b1206}
+.links a{text-decoration:none;font-weight:700;border-radius:12px;padding:10px 14px;border:1px solid var(--f-line,var(--line));background:var(--surface);color:var(--f-text,var(--blue))}
+.links a.main{background:var(--f,var(--accent));border-color:var(--f,var(--accent));color:var(--surface)}
 a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 </style>
 </head>
@@ -42,9 +54,10 @@ a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
     <p>Übungen zum Üben am Tablet oder Computer und Blätter zum Ausdrucken.</p>
   </header>
 
-  <!-- Neue Themen hier als weitere <article class="topic"> einfügen -->
+  <!-- Neue Themen als weitere <article class="topic" data-fach="…"> einfügen.
+       Fächer: mathe (orange), francais (blau), deutsch (rot), englisch (lila), sciences (grün) -->
   <section class="topics">
-    <article class="topic">
+    <article class="topic" data-fach="mathe">
       <span class="tag">Mathe</span>
       <h2>Teilbarkeitsregeln</h2>
       <p>Teilbar durch 2, 3, 4, 5, 7, 8, 9, 10, 12, 15 und 25.</p>
@@ -54,7 +67,7 @@ a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
         <a href="teilbarkeit/uebungsblatt-einfach.pdf">Übungsblatt (schlicht)</a>
       </div>
     </article>
-    <article class="topic">
+    <article class="topic" data-fach="francais">
       <span class="tag">Français</span>
       <h2>Les verbes pronominaux au passé composé</h2>
       <p>Lückensätze: se lever, s'asseoir, se taire … mit Angleichung und Verneinung.</p>
