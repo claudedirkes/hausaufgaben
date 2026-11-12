@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hausaufgaben</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: eine Spalte – Kopf, darunter eine Karte pro Thema */
+:root{
+  --bg:#f3f6fb; --surface:#ffffff; --ink:#1b2a49; --muted:#5b6886; --line:#d8e0ee;
+  --accent:#ff7a1a; --blue:#2f80ed; --tag:#d6ecff;
+  --display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#111a2c; --surface:#1a2640; --ink:#e8eefb; --muted:#9fb0cf; --line:#2c3b5c;
+  --accent:#ff8f3d; --blue:#6aa8ff; --tag:#1f3a5a; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px}
+.wrap{max-width:720px;margin:0 auto;display:grid;gap:18px}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:2.2rem;line-height:1.1}
+h1 span{color:var(--accent)}
+header p{margin:6px 0 0;color:var(--muted)}
+.topics{display:grid;gap:12px}
+.topic{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0}
+.topic h2{font-size:1.4rem}
+.topic p{margin:0;color:var(--muted)}
+.tag{justify-self:start;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--tag);border-radius:999px;padding:3px 10px}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links a{text-decoration:none;font-weight:700;border-radius:12px;padding:10px 14px;border:1px solid var(--line);color:var(--blue)}
+.links a.main{background:var(--accent);border-color:var(--accent);color:#1b1206}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Haus<span>aufgaben</span></h1>
+    <p>Übungen zum Üben am Tablet oder Computer und Blätter zum Ausdrucken.</p>
+  </header>
+
+  <!-- Neue Themen hier als weitere <article class="topic"> einfügen -->
+  <section class="topics">
+    <article class="topic">
+      <span class="tag">Mathe</span>
+      <h2>Teilbarkeitsregeln</h2>
+      <p>Teilbar durch 2, 3, 4, 5, 7, 8, 9, 10, 12, 15 und 25.</p>
+      <div class="links">
+        <a class="main" href="teilbarkeit/">Üben</a>
+        <a href="teilbarkeit/uebungsblatt.pdf">Übungsblatt (bunt)</a>
+        <a href="teilbarkeit/uebungsblatt-einfach.pdf">Übungsblatt (schlicht)</a>
+      </div>
+    </article>
+  </section>
+</div>
+</body>
+</html>

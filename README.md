@@ -1,1 +1,17 @@
-# hausaufgaben
+# Hausaufgaben
+
+Übungs-Apps und Übungsblätter zum Ausdrucken.
+
+**Online:** https://claudedirkes.github.io/hausaufgaben/
+
+## Themen
+
+| Thema | App | Blätter |
+| --- | --- | --- |
+| Teilbarkeitsregeln | [teilbarkeit/](teilbarkeit/) | [bunt](teilbarkeit/uebungsblatt.pdf) · [schlicht](teilbarkeit/uebungsblatt-einfach.pdf) |
+
+## Neues Thema hinzufügen
+
+1. Neuen Ordner anlegen, z. B. `bruchrechnen/`, mit `index.html` (App) und den PDFs.
+2. In der `index.html` im Hauptordner eine weitere Themen-Karte einfügen.
+3. Die Tabelle oben ergänzen.
