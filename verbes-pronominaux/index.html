@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verbes pronominaux</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: eine Spalte – Zähler, Übungsart, Lückensatz-Karte, Regeln */
+:root{
+  --bg:#f3f6fb; --surface:#ffffff; --ink:#1b2a49; --muted:#5b6886; --line:#d8e0ee;
+  --accent:#2f63d6; --accent-ink:#ffffff; --red:#e5484d; --blue:#2f63d6;
+  --ok:#1f9d63; --ok-bg:#e3f7ec; --bad:#d64545; --bad-bg:#fde8e8; --warn-bg:#fff3c4; --chip:#eef3fb;
+  --c1:#d6ecff; --c2:#fff3c4;
+  --display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#111a2c; --surface:#1a2640; --ink:#e8eefb; --muted:#9fb0cf; --line:#2c3b5c;
+  --accent:#6f9bff; --accent-ink:#0e1830; --red:#ff7b7f; --blue:#6f9bff;
+  --ok:#4fd398; --ok-bg:#163a2b; --bad:#ff7b7b; --bad-bg:#432026; --warn-bg:#4a4220; --chip:#22314f;
+  --c1:#1f3a5a; --c2:#4a4220; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:720px;margin:0 auto;display:grid;gap:18px}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:2rem;line-height:1.1}
+h1 span{color:var(--red)}
+h2{font-size:1.15rem}
+a{color:var(--blue);text-decoration:none;font-weight:700}
+header p{margin:4px 0 0;color:var(--muted)}
+.flag{display:inline-flex;height:.55em;vertical-align:.25em;margin-left:.3em;border-radius:3px;overflow:hidden}
+.flag i{width:.45em;display:block}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 14px}
+.stat b{display:block;font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.stat small{color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.7rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:700 .95rem var(--body);border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:14px;min-width:0}
+.cue{color:var(--muted);font-style:italic;font-size:.95rem}
+.sentence{font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:700;line-height:1.5}
+.gap{display:inline-block;min-width:5em;border-bottom:3px solid var(--accent);color:var(--accent);text-align:center;padding:0 .2em}
+.gap.small{min-width:1.8em}
+.hint{color:var(--muted);font-weight:600;font-style:italic}
+input[type=text]{font:700 1.2rem var(--body);width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:700 1.1rem var(--display);border:none;border-radius:14px;padding:13px 22px;cursor:pointer;flex:1 1 120px}
+.btn.main{background:var(--accent);color:var(--accent-ink)}
+.btn.end{background:var(--chip);color:var(--ink);border:2px solid var(--line)}
+.btn:focus-visible,.tab:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.keys{display:flex;gap:6px;flex-wrap:wrap}
+.key{font:700 1rem var(--body);min-width:40px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer}
+.fb{border-radius:14px;padding:14px 16px;font-weight:600}
+.fb.ok{background:var(--ok-bg)} .fb.no{background:var(--bad-bg)} .fb.almost{background:var(--warn-bg)}
+.fb strong{font-family:var(--display);font-size:1.2rem;display:block}
+.fb p{margin:4px 0 0}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.rule{border-radius:16px;padding:14px 16px}
+.rule h3{font-family:var(--display);margin:0 0 6px;font-size:1.15rem}
+.rule table{border-collapse:collapse;font-size:.95rem}
+.rule td{padding:1px 10px 1px 0}
+.rule p{margin:0 0 6px;font-size:.95rem}
+.downloads{display:flex;gap:10px;flex-wrap:wrap}
+.downloads a{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+@media (prefers-reduced-motion:no-preference){.pop{animation:pop .25s ease-out}@keyframes pop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav><a href="../">← Alle Themen</a></nav>
+  <header>
+    <h1>Verbes <span>pronominaux</span><span class="flag" aria-hidden="true"><i style="background:#2f63d6"></i><i style="background:#fff"></i><i style="background:#e5484d"></i></span></h1>
+    <p>Complète les phrases au passé composé.</p>
+  </header>
+
+  <div class="stats" aria-live="polite">
+    <div class="stat"><small>Juste</small><b id="sRight">0</b></div>
+    <div class="stat"><small>Phrases</small><b id="sTotal">0</b></div>
+    <div class="stat"><small>Juste d'affilée</small><b id="sStreak">0</b></div>
+    <div class="stat"><small>Record</small><b id="sBest">0</b></div>
+  </div>
+
+  <div class="tabs" role="group" aria-label="Type d'exercice">
+    <button class="tab" data-mode="full" aria-pressed="true">Verbe entier</button>
+    <button class="tab" data-mode="end" aria-pressed="false">Terminaison</button>
+    <button class="tab" data-mode="neg" aria-pressed="false">Négation</button>
+    <button class="tab" data-mode="mix" aria-pressed="false">Tout mélangé</button>
+  </div>
+
+  <section class="card pop" id="task" aria-live="polite"></section>
+
+  <section style="display:grid;gap:10px">
+    <h2>À retenir</h2>
+    <div class="rules">
+      <div class="rule" style="background:var(--c1)">
+        <h3>Exemple : se lever</h3>
+        <table>
+          <tr><td><b>je</b></td><td>me suis levé(e)</td></tr>
+          <tr><td><b>tu</b></td><td>t'es levé(e)</td></tr>
+          <tr><td><b>il / elle</b></td><td>s'est levé / levée</td></tr>
+          <tr><td><b>nous</b></td><td>nous sommes levé(e)s</td></tr>
+          <tr><td><b>vous</b></td><td>vous êtes levé(e)s</td></tr>
+          <tr><td><b>ils / elles</b></td><td>se sont levés / levées</td></tr>
+        </table>
+      </div>
+      <div class="rule" style="background:var(--c2)">
+        <h3>Les règles</h3>
+        <p><b>1.</b> Toujours avec <b>être</b> : pronom + être + participe.</p>
+        <p><b>2.</b> Le participe s'accorde avec le sujet : fille <b>+e</b>, garçons <b>+s</b>, filles <b>+es</b>.</p>
+        <p><b>3.</b> Négation : <b>ne</b> + pronom + être + <b>pas</b> + participe.</p>
+        <p><b>4.</b> Participes irréguliers : assis, mis, tu, souvenu, inscrit, enfui, plaint, aperçu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:10px">
+    <h2>Fiche à imprimer</h2>
+    <div class="downloads"><a href="fiche.pdf">Fiche d'exercices (PDF)</a></div>
+  </section>
+</div>
+
+<script>
+const BANK=[{"cue": "Léa", "pre": "Ce matin, je", "post": "à sept heures.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "full", "hint": "se réveiller", "answer": "me suis réveillée"}, {"cue": "Léa", "pre": "Ce matin, je", "post": "à sept heures.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "end", "stem": "me suis réveillé", "answer": "e", "full": "me suis réveillée"}, {"cue": "Léa", "pre": "Ce matin, je", "post": "à sept heures.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se réveiller", "answer": "ne me suis pas réveillée"}, {"cue": "Tom", "pre": "Hier soir, je", "post": "très tard.", "why": "Avec être, le participe s'accorde avec le sujet « je (Tom) » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "se coucher", "answer": "me suis couché"}, {"cue": "Tom", "pre": "Hier soir, je", "post": "très tard.", "why": "Avec être, le participe s'accorde avec le sujet « je (Tom) » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "me suis couché", "answer": "", "full": "me suis couché"}, {"cue": "Tom", "pre": "Hier soir, je", "post": "très tard.", "why": "Avec être, le participe s'accorde avec le sujet « je (Tom) » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas se coucher", "answer": "ne me suis pas couché"}, {"cue": "", "pre": "Maman", "post": "pour prendre le bus.", "why": "Avec être, le participe s'accorde avec le sujet « Maman » (féminin singulier) : + e.", "type": "full", "hint": "se dépêcher", "answer": "s'est dépêchée"}, {"cue": "", "pre": "Maman", "post": "pour prendre le bus.", "why": "Avec être, le participe s'accorde avec le sujet « Maman » (féminin singulier) : + e.", "type": "end", "stem": "s'est dépêché", "answer": "e", "full": "s'est dépêchée"}, {"cue": "", "pre": "Maman", "post": "pour prendre le bus.", "why": "Avec être, le participe s'accorde avec le sujet « Maman » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se dépêcher", "answer": "ne s'est pas dépêchée"}, {"cue": "", "pre": "Mon frère", "post": "avant le dîner.", "why": "Avec être, le participe s'accorde avec le sujet « mon frère » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "se laver", "answer": "s'est lavé"}, {"cue": "", "pre": "Mon frère", "post": "avant le dîner.", "why": "Avec être, le participe s'accorde avec le sujet « mon frère » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "s'est lavé", "answer": "", "full": "s'est lavé"}, {"cue": "", "pre": "Mon frère", "post": "avant le dîner.", "why": "Avec être, le participe s'accorde avec le sujet « mon frère » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas se laver", "answer": "ne s'est pas lavé"}, {"cue": "", "pre": "Les enfants", "post": "dans le jardin.", "why": "Avec être, le participe s'accorde avec le sujet « les enfants » (masculin pluriel) : + s.", "type": "full", "hint": "s'amuser", "answer": "se sont amusés"}, {"cue": "", "pre": "Les enfants", "post": "dans le jardin.", "why": "Avec être, le participe s'accorde avec le sujet « les enfants » (masculin pluriel) : + s.", "type": "end", "stem": "se sont amusé", "answer": "s", "full": "se sont amusés"}, {"cue": "", "pre": "Les enfants", "post": "dans le jardin.", "why": "Avec être, le participe s'accorde avec le sujet « les enfants » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas s'amuser", "answer": "ne se sont pas amusés"}, {"cue": "", "pre": "Mes sœurs", "post": "pour la fête.", "why": "Avec être, le participe s'accorde avec le sujet « mes sœurs » (féminin pluriel) : + es.", "type": "full", "hint": "s'habiller", "answer": "se sont habillées"}, {"cue": "", "pre": "Mes sœurs", "post": "pour la fête.", "why": "Avec être, le participe s'accorde avec le sujet « mes sœurs » (féminin pluriel) : + es.", "type": "end", "stem": "se sont habillé", "answer": "es", "full": "se sont habillées"}, {"cue": "", "pre": "Mes sœurs", "post": "pour la fête.", "why": "Avec être, le participe s'accorde avec le sujet « mes sœurs » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas s'habiller", "answer": "ne se sont pas habillées"}, {"cue": "Paul et Max", "pre": "Nous", "post": "dans la forêt.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "full", "hint": "se promener", "answer": "nous sommes promenés"}, {"cue": "Paul et Max", "pre": "Nous", "post": "dans la forêt.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "end", "stem": "nous sommes promené", "answer": "s", "full": "nous sommes promenés"}, {"cue": "Paul et Max", "pre": "Nous", "post": "dans la forêt.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas se promener", "answer": "ne nous sommes pas promenés"}, {"cue": "Léa et Emma", "pre": "Nous", "post": "après le match.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Léa et Emma) » (féminin pluriel) : + es.", "type": "full", "hint": "se reposer", "answer": "nous sommes reposées"}, {"cue": "Léa et Emma", "pre": "Nous", "post": "après le match.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Léa et Emma) » (féminin pluriel) : + es.", "type": "end", "stem": "nous sommes reposé", "answer": "es", "full": "nous sommes reposées"}, {"cue": "Léa et Emma", "pre": "Nous", "post": "après le match.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Léa et Emma) » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas se reposer", "answer": "ne nous sommes pas reposées"}, {"cue": "Tom demande à Léa", "pre": "Tu", "post": "à quelle heure ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Léa) » (féminin singulier) : + e.", "type": "full", "hint": "se lever", "answer": "t'es levée"}, {"cue": "Tom demande à Léa", "pre": "Tu", "post": "à quelle heure ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Léa) » (féminin singulier) : + e.", "type": "end", "stem": "t'es levé", "answer": "e", "full": "t'es levée"}, {"cue": "Tom demande à Léa", "pre": "Tu", "post": "à quelle heure ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Léa) » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se lever", "answer": "ne t'es pas levée"}, {"cue": "Léa demande à Tom", "pre": "Pourquoi tu", "post": "sous la table ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Tom) » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "se cacher", "answer": "t'es caché"}, {"cue": "Léa demande à Tom", "pre": "Pourquoi tu", "post": "sous la table ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Tom) » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "t'es caché", "answer": "", "full": "t'es caché"}, {"cue": "Léa demande à Tom", "pre": "Pourquoi tu", "post": "sous la table ?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Tom) » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas se cacher", "answer": "ne t'es pas caché"}, {"cue": "Le professeur aux garçons", "pre": "Vous", "post": "à votre place.", "why": "Avec être, le participe s'accorde avec le sujet « vous (les garçons) » (masculin pluriel) : assis ne change pas au pluriel.", "type": "full", "hint": "s'asseoir", "answer": "vous êtes assis"}, {"cue": "Le professeur aux garçons", "pre": "Vous", "post": "à votre place.", "why": "Avec être, le participe s'accorde avec le sujet « vous (les garçons) » (masculin pluriel) : assis ne change pas au pluriel.", "type": "end", "stem": "vous êtes assis", "answer": "", "full": "vous êtes assis"}, {"cue": "Le professeur aux garçons", "pre": "Vous", "post": "à votre place.", "why": "Avec être, le participe s'accorde avec le sujet « vous (les garçons) » (masculin pluriel) : assis ne change pas au pluriel.", "type": "neg", "hint": "ne pas s'asseoir", "answer": "ne vous êtes pas assis"}, {"cue": "", "pre": "Le chat", "post": "sur le canapé.", "why": "Avec être, le participe s'accorde avec le sujet « le chat » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "s'endormir", "answer": "s'est endormi"}, {"cue": "", "pre": "Le chat", "post": "sur le canapé.", "why": "Avec être, le participe s'accorde avec le sujet « le chat » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "s'est endormi", "answer": "", "full": "s'est endormi"}, {"cue": "", "pre": "Le chat", "post": "sur le canapé.", "why": "Avec être, le participe s'accorde avec le sujet « le chat » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas s'endormir", "answer": "ne s'est pas endormi"}, {"cue": "", "pre": "Julie", "post": "pour l'école.", "why": "Avec être, le participe s'accorde avec le sujet « Julie » (féminin singulier) : + e.", "type": "full", "hint": "se préparer", "answer": "s'est préparée"}, {"cue": "", "pre": "Julie", "post": "pour l'école.", "why": "Avec être, le participe s'accorde avec le sujet « Julie » (féminin singulier) : + e.", "type": "end", "stem": "s'est préparé", "answer": "e", "full": "s'est préparée"}, {"cue": "", "pre": "Julie", "post": "pour l'école.", "why": "Avec être, le participe s'accorde avec le sujet « Julie » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se préparer", "answer": "ne s'est pas préparée"}, {"cue": "", "pre": "Les joueurs", "post": "au stade.", "why": "Avec être, le participe s'accorde avec le sujet « les joueurs » (masculin pluriel) : + s.", "type": "full", "hint": "se retrouver", "answer": "se sont retrouvés"}, {"cue": "", "pre": "Les joueurs", "post": "au stade.", "why": "Avec être, le participe s'accorde avec le sujet « les joueurs » (masculin pluriel) : + s.", "type": "end", "stem": "se sont retrouvé", "answer": "s", "full": "se sont retrouvés"}, {"cue": "", "pre": "Les joueurs", "post": "au stade.", "why": "Avec être, le participe s'accorde avec le sujet « les joueurs » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas se retrouver", "answer": "ne se sont pas retrouvés"}, {"cue": "", "pre": "Ma grand-mère", "post": "près de la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « ma grand-mère » (féminin singulier) : + e.", "type": "full", "hint": "s'asseoir", "answer": "s'est assise"}, {"cue": "", "pre": "Ma grand-mère", "post": "près de la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « ma grand-mère » (féminin singulier) : + e.", "type": "end", "stem": "s'est assis", "answer": "e", "full": "s'est assise"}, {"cue": "", "pre": "Ma grand-mère", "post": "près de la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « ma grand-mère » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas s'asseoir", "answer": "ne s'est pas assise"}, {"cue": "", "pre": "Les deux frères", "post": "pour la télécommande.", "why": "Avec être, le participe s'accorde avec le sujet « les deux frères » (masculin pluriel) : + s.", "type": "full", "hint": "se disputer", "answer": "se sont disputés"}, {"cue": "", "pre": "Les deux frères", "post": "pour la télécommande.", "why": "Avec être, le participe s'accorde avec le sujet « les deux frères » (masculin pluriel) : + s.", "type": "end", "stem": "se sont disputé", "answer": "s", "full": "se sont disputés"}, {"cue": "", "pre": "Les deux frères", "post": "pour la télécommande.", "why": "Avec être, le participe s'accorde avec le sujet « les deux frères » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas se disputer", "answer": "ne se sont pas disputés"}, {"cue": "", "pre": "Elles", "post": "dans la ville.", "why": "Avec être, le participe s'accorde avec le sujet « elles » (féminin pluriel) : + es.", "type": "full", "hint": "se perdre", "answer": "se sont perdues"}, {"cue": "", "pre": "Elles", "post": "dans la ville.", "why": "Avec être, le participe s'accorde avec le sujet « elles » (féminin pluriel) : + es.", "type": "end", "stem": "se sont perdu", "answer": "es", "full": "se sont perdues"}, {"cue": "", "pre": "Elles", "post": "dans la ville.", "why": "Avec être, le participe s'accorde avec le sujet « elles » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas se perdre", "answer": "ne se sont pas perdues"}, {"cue": "", "pre": "Il", "post": "dans sa nouvelle chambre.", "why": "Avec être, le participe s'accorde avec le sujet « il » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "s'installer", "answer": "s'est installé"}, {"cue": "", "pre": "Il", "post": "dans sa nouvelle chambre.", "why": "Avec être, le participe s'accorde avec le sujet « il » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "s'est installé", "answer": "", "full": "s'est installé"}, {"cue": "", "pre": "Il", "post": "dans sa nouvelle chambre.", "why": "Avec être, le participe s'accorde avec le sujet « il » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas s'installer", "answer": "ne s'est pas installé"}, {"cue": "", "pre": "Ma tante", "post": "de mon anniversaire.", "why": "Avec être, le participe s'accorde avec le sujet « ma tante » (féminin singulier) : + e.", "type": "full", "hint": "se souvenir", "answer": "s'est souvenue"}, {"cue": "", "pre": "Ma tante", "post": "de mon anniversaire.", "why": "Avec être, le participe s'accorde avec le sujet « ma tante » (féminin singulier) : + e.", "type": "end", "stem": "s'est souvenu", "answer": "e", "full": "s'est souvenue"}, {"cue": "", "pre": "Ma tante", "post": "de mon anniversaire.", "why": "Avec être, le participe s'accorde avec le sujet « ma tante » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se souvenir", "answer": "ne s'est pas souvenue"}, {"cue": "", "pre": "Quand le directeur est entré, les élèves", "post": "tout de suite.", "why": "Avec être, le participe s'accorde avec le sujet « les élèves » (masculin pluriel) : + s.", "type": "full", "hint": "se taire", "answer": "se sont tus"}, {"cue": "", "pre": "Quand le directeur est entré, les élèves", "post": "tout de suite.", "why": "Avec être, le participe s'accorde avec le sujet « les élèves » (masculin pluriel) : + s.", "type": "end", "stem": "se sont tu", "answer": "s", "full": "se sont tus"}, {"cue": "", "pre": "Quand le directeur est entré, les élèves", "post": "tout de suite.", "why": "Avec être, le participe s'accorde avec le sujet « les élèves » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas se taire", "answer": "ne se sont pas tus"}, {"cue": "", "pre": "Après le film, ma petite sœur", "post": "à pleurer.", "why": "Avec être, le participe s'accorde avec le sujet « ma petite sœur » (féminin singulier) : + e.", "type": "full", "hint": "se mettre", "answer": "s'est mise"}, {"cue": "", "pre": "Après le film, ma petite sœur", "post": "à pleurer.", "why": "Avec être, le participe s'accorde avec le sujet « ma petite sœur » (féminin singulier) : + e.", "type": "end", "stem": "s'est mis", "answer": "e", "full": "s'est mise"}, {"cue": "", "pre": "Après le film, ma petite sœur", "post": "à pleurer.", "why": "Avec être, le participe s'accorde avec le sujet « ma petite sœur » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se mettre", "answer": "ne s'est pas mise"}, {"cue": "", "pre": "Mes cousines", "post": "au club de handball.", "why": "Avec être, le participe s'accorde avec le sujet « mes cousines » (féminin pluriel) : + es.", "type": "full", "hint": "s'inscrire", "answer": "se sont inscrites"}, {"cue": "", "pre": "Mes cousines", "post": "au club de handball.", "why": "Avec être, le participe s'accorde avec le sujet « mes cousines » (féminin pluriel) : + es.", "type": "end", "stem": "se sont inscrit", "answer": "es", "full": "se sont inscrites"}, {"cue": "", "pre": "Mes cousines", "post": "au club de handball.", "why": "Avec être, le participe s'accorde avec le sujet « mes cousines » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas s'inscrire", "answer": "ne se sont pas inscrites"}, {"cue": "", "pre": "En voyant la police, le voleur", "post": "par la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « le voleur » (masculin singulier) : pas de terminaison.", "type": "full", "hint": "s'enfuir", "answer": "s'est enfui"}, {"cue": "", "pre": "En voyant la police, le voleur", "post": "par la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « le voleur » (masculin singulier) : pas de terminaison.", "type": "end", "stem": "s'est enfui", "answer": "", "full": "s'est enfui"}, {"cue": "", "pre": "En voyant la police, le voleur", "post": "par la fenêtre.", "why": "Avec être, le participe s'accorde avec le sujet « le voleur » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas s'enfuir", "answer": "ne s'est pas enfui"}, {"cue": "Paul et Max", "pre": "Pendant les vacances, nous", "post": "un peu.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "full", "hint": "s'ennuyer", "answer": "nous sommes ennuyés"}, {"cue": "Paul et Max", "pre": "Pendant les vacances, nous", "post": "un peu.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "end", "stem": "nous sommes ennuyé", "answer": "s", "full": "nous sommes ennuyés"}, {"cue": "Paul et Max", "pre": "Pendant les vacances, nous", "post": "un peu.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Paul et Max) » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas s'ennuyer", "answer": "ne nous sommes pas ennuyés"}, {"cue": "", "pre": "L'équipe", "post": "tous les mercredis.", "why": "Avec être, le participe s'accorde avec le sujet « l'équipe » (féminin singulier) : + e.", "type": "full", "hint": "s'entraîner", "answer": "s'est entraînée"}, {"cue": "", "pre": "L'équipe", "post": "tous les mercredis.", "why": "Avec être, le participe s'accorde avec le sujet « l'équipe » (féminin singulier) : + e.", "type": "end", "stem": "s'est entraîné", "answer": "e", "full": "s'est entraînée"}, {"cue": "", "pre": "L'équipe", "post": "tous les mercredis.", "why": "Avec être, le participe s'accorde avec le sujet « l'équipe » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas s'entraîner", "answer": "ne s'est pas entraînée"}, {"cue": "Léa", "pre": "Hier, je", "post": "malade toute la journée.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "full", "hint": "se sentir", "answer": "me suis sentie"}, {"cue": "Léa", "pre": "Hier, je", "post": "malade toute la journée.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "end", "stem": "me suis senti", "answer": "e", "full": "me suis sentie"}, {"cue": "Léa", "pre": "Hier, je", "post": "malade toute la journée.", "why": "Avec être, le participe s'accorde avec le sujet « je (Léa) » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se sentir", "answer": "ne me suis pas sentie"}, {"cue": "", "pre": "Les voisins", "post": "du bruit.", "why": "Avec être, le participe s'accorde avec le sujet « les voisins » (masculin pluriel) : + s.", "type": "full", "hint": "se plaindre", "answer": "se sont plaints"}, {"cue": "", "pre": "Les voisins", "post": "du bruit.", "why": "Avec être, le participe s'accorde avec le sujet « les voisins » (masculin pluriel) : + s.", "type": "end", "stem": "se sont plaint", "answer": "s", "full": "se sont plaints"}, {"cue": "", "pre": "Les voisins", "post": "du bruit.", "why": "Avec être, le participe s'accorde avec le sujet « les voisins » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas se plaindre", "answer": "ne se sont pas plaints"}, {"cue": "", "pre": "La maîtresse", "post": "de son erreur.", "why": "Avec être, le participe s'accorde avec le sujet « la maîtresse » (féminin singulier) : + e.", "type": "full", "hint": "s'apercevoir", "answer": "s'est aperçue"}, {"cue": "", "pre": "La maîtresse", "post": "de son erreur.", "why": "Avec être, le participe s'accorde avec le sujet « la maîtresse » (féminin singulier) : + e.", "type": "end", "stem": "s'est aperçu", "answer": "e", "full": "s'est aperçue"}, {"cue": "", "pre": "La maîtresse", "post": "de son erreur.", "why": "Avec être, le participe s'accorde avec le sujet « la maîtresse » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas s'apercevoir", "answer": "ne s'est pas aperçue"}, {"cue": "La maman parle à ses filles", "pre": "Vous", "post": "en pyjama ?", "why": "Avec être, le participe s'accorde avec le sujet « vous (les filles) » (féminin pluriel) : + es.", "type": "full", "hint": "se mettre", "answer": "vous êtes mises"}, {"cue": "La maman parle à ses filles", "pre": "Vous", "post": "en pyjama ?", "why": "Avec être, le participe s'accorde avec le sujet « vous (les filles) » (féminin pluriel) : + es.", "type": "end", "stem": "vous êtes mis", "answer": "es", "full": "vous êtes mises"}, {"cue": "La maman parle à ses filles", "pre": "Vous", "post": "en pyjama ?", "why": "Avec être, le participe s'accorde avec le sujet « vous (les filles) » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas se mettre", "answer": "ne vous êtes pas mises"}, {"cue": "Tom", "pre": "Ce matin, je", "post": ".", "why": "Avec être, le participe s'accorde avec le sujet « je (Tom) » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas se laver", "answer": "ne me suis pas lavé"}, {"cue": "", "pre": "Léa", "post": "et elle a raté le bus.", "why": "Avec être, le participe s'accorde avec le sujet « Léa » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se dépêcher", "answer": "ne s'est pas dépêchée"}, {"cue": "", "pre": "Les garçons", "post": "à la fête.", "why": "Avec être, le participe s'accorde avec le sujet « les garçons » (masculin pluriel) : + s.", "type": "neg", "hint": "ne pas s'amuser", "answer": "ne se sont pas amusés"}, {"cue": "Emma", "pre": "Hier, je", "post": "tôt.", "why": "Avec être, le participe s'accorde avec le sujet « je (Emma) » (féminin singulier) : + e.", "type": "neg", "hint": "ne pas se coucher", "answer": "ne me suis pas couchée"}, {"cue": "Léa et Emma", "pre": "Nous", "post": "dans la forêt.", "why": "Avec être, le participe s'accorde avec le sujet « nous (Léa et Emma) » (féminin pluriel) : + es.", "type": "neg", "hint": "ne pas se perdre", "answer": "ne nous sommes pas perdues"}, {"cue": "Max demande à Tom", "pre": "Tu", "post": "?", "why": "Avec être, le participe s'accorde avec le sujet « tu (Tom) » (masculin singulier) : pas de terminaison.", "type": "neg", "hint": "ne pas se réveiller", "answer": "ne t'es pas réveillé"}];
+let mode="full", cur=null, last=-1;
+let st={right:0,total:0,streak:0,best:0};
+try{st.best=+localStorage.getItem("vp-best")||0}catch(e){}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const join=(...p)=>p.filter(Boolean).join(" ").replace(/ \./g,".");
+// Vergleich: Kleinschreibung, gleiche Apostrophe, Leerzeichen, Satzzeichen am Ende egal
+const norm=s=>s.toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*'\s*/g,"'").replace(/\s+/g," ").replace(/^[\s.,!?]+|[\s.,!?]+$/g,"").trim();
+const noAcc=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"");
+
+function score(ok){
+  st.total++; if(ok){st.right++;st.streak++;st.best=Math.max(st.best,st.streak)} else st.streak=0;
+  try{localStorage.setItem("vp-best",st.best)}catch(e){}
+  $("sRight").textContent=st.right;$("sTotal").textContent=st.total;$("sStreak").textContent=st.streak;$("sBest").textContent=st.best;
+}
+const PRAISE=["Bravo !","Super !","Parfait !","Excellent !","Très bien !"];
+function render(html){const t=$("task");t.classList.remove("pop");void t.offsetWidth;t.classList.add("pop");t.innerHTML=html}
+function pick(){
+  const pool=BANK.map((b,i)=>i).filter(i=>mode==="mix"||BANK[i].type===mode);
+  let i; do{i=pool[Math.floor(Math.random()*pool.length)]}while(pool.length>1&&i===last);
+  last=i; return BANK[i];
+}
+function showResult(kind,title,body){
+  $("ans").outerHTML=`<div class="fb ${kind}"><strong>${title}</strong>${body}</div>
+    <div class="row"><button class="btn main" id="next">Phrase suivante</button></div>`;
+  $("next").onclick=newTask;$("next").focus();
+}
+const full=t=>join(esc(t.pre),`<b>${esc(t.type==="end"?t.full:t.answer)}</b>`,esc(t.post));
+
+function newTask(){
+  cur=pick();
+  const cue=cur.cue?`<div class="cue">${esc(cur.cue)} :</div>`:"";
+  if(cur.type==="end"){
+    render(`${cue}<div class="sentence">${join(esc(cur.pre),esc(cur.stem)+'<span class="gap small">?</span>',esc(cur.post))}</div>
+      <div class="hint">Quelle terminaison ?</div>
+      <div class="row" id="ans">${["","e","s","es"].map(e=>`<button class="btn end" data-e="${e}">${e?"-"+e:"rien"}</button>`).join("")}</div>`);
+    $("ans").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+      const ok=b.dataset.e===cur.answer;score(ok);
+      showResult(ok?"ok":"no",ok?PRAISE[Math.floor(Math.random()*5)]:"Pas tout à fait.",
+        `<p>${full(cur)}</p><p>${esc(cur.why)}</p>`)};
+    return;
+  }
+  render(`${cue}<div class="sentence">${join(esc(cur.pre),'<span class="gap">…</span>',`<span class="hint">(${esc(cur.hint)})</span>`,esc(cur.post))}</div>
+    <div id="ans" style="display:grid;gap:10px">
+      <input type="text" id="inp" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${cur.type==="neg"?"ne … pas …":"ex. : s'est levée"}" aria-label="Ta réponse">
+      <div class="keys" id="keys">${["é","è","ê","à","ç","î","û","'"].map(k=>`<button class="key" type="button">${k}</button>`).join("")}</div>
+      <div class="row"><button class="btn main" id="check">Vérifier</button></div>
+    </div>`);
+  const inp=$("inp");inp.focus();
+  $("keys").onclick=e=>{const b=e.target.closest(".key");if(!b)return;
+    const s=inp.selectionStart??inp.value.length,en=inp.selectionEnd??s;
+    inp.value=inp.value.slice(0,s)+b.textContent+inp.value.slice(en);inp.focus();inp.setSelectionRange(s+1,s+1)};
+  inp.onkeydown=e=>{if(e.key==="Enter")check()};
+  $("check").onclick=check;
+}
+function check(){
+  let v=norm($("inp").value); if(!v){$("inp").focus();return}
+  const a=norm(cur.answer);
+  // Wer das Subjekt mitschreibt (z. B. "je me suis levée"), bekommt es trotzdem richtig
+  const subj=norm(cur.pre).split(" ").pop();
+  if(v.startsWith(subj+" ")&&v.slice(subj.length+1)===a)v=a;
+  if(v===a){score(true);showResult("ok",PRAISE[Math.floor(Math.random()*5)],`<p>${full(cur)}</p>`);return}
+  score(false);
+  if(noAcc(v)===noAcc(a)){showResult("almost","Presque ! Attention aux accents.",`<p>${full(cur)}</p>`);return}
+  let tip=cur.why;
+  if(/\b(ai|as|a|avons|avez|ont)\b/.test(v))tip="Les verbes pronominaux se conjuguent toujours avec <b>être</b>, jamais avec avoir. "+esc(cur.why);
+  else if(/\b(se|me|te) (est|es)\b/.test(v))tip="Devant <b>est</b> ou <b>es</b>, on écrit <b>s'</b> ou <b>t'</b> avec apostrophe. "+esc(cur.why);
+  else if(cur.type==="neg"&&!(/\bne\b|\bn'/.test(v)&&/\bpas\b/.test(v)))tip="N'oublie pas <b>ne … pas</b> : ne + pronom + être + pas + participe.";
+  else tip=esc(cur.why);
+  showResult("no","Pas tout à fait.",`<p>Tu as écrit : <i>${esc($("inp")?$("inp").value:v)}</i></p><p>La bonne réponse : ${full(cur)}</p><p>${tip}</p>`);
+}
+document.querySelector(".tabs").onclick=e=>{const b=e.target.closest(".tab");if(!b)return;
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",t===b));mode=b.dataset.mode;newTask()};
+$("sBest").textContent=st.best;
+newTask();
+</script>
+</body>
+</html>

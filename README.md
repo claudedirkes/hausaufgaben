@@ -9,6 +9,7 @@
 | Thema | App | Blätter |
 | --- | --- | --- |
 | Teilbarkeitsregeln | [teilbarkeit/](teilbarkeit/) | [bunt](teilbarkeit/uebungsblatt.pdf) · [schlicht](teilbarkeit/uebungsblatt-einfach.pdf) |
+| Verbes pronominaux (passé composé) | [verbes-pronominaux/](verbes-pronominaux/) | [fiche](verbes-pronominaux/fiche.pdf) |
 
 ## Neues Thema hinzufügen
 
