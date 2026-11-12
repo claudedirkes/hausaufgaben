@@ -81,7 +81,7 @@ header p{margin:4px 0 0;color:var(--muted)}
 </head>
 <body>
 <div class="wrap">
-  <nav class="top"><a href="../">← Alle Themen</a></nav>
+  <nav class="top"><a href="../">← Alle Themen</a><a href="../statistik.html">Statistik</a></nav>
   <header>
     <h1>Teilbar-<span>Trainer</span></h1>
     <p>Üb die Teilbarkeitsregeln. Jede Aufgabe ist neu – du kannst so lange üben, wie du willst.</p>
@@ -127,6 +127,7 @@ header p{margin:4px 0 0;color:var(--muted)}
   </section>
 </div>
 
+<script src="../config.js"></script>
 <script>
 const DIVS=[2,3,4,5,7,8,9,10,12,15,25];
 const RULES={
@@ -180,6 +181,7 @@ function pickNumber(d){
 const activeList=()=>[...active].sort((a,b)=>a-b);
 
 function score(ok){
+  if(window.HA_STATS)HA_STATS.log("teilbarkeit",mode,cur&&cur.label,ok);
   st.total++; if(ok){st.right++;st.streak++;st.best=Math.max(st.best,st.streak)} else st.streak=0;
   try{localStorage.setItem("tt-best",st.best)}catch(e){}
   $("sRight").textContent=st.right;$("sTotal").textContent=st.total;$("sStreak").textContent=st.streak;$("sBest").textContent=st.best;
@@ -194,7 +196,7 @@ function render(html){const t=$("task");t.classList.remove("pop");void t.offsetW
 
 /* Modus 1: Ja oder Nein */
 function taskYN(){
-  const l=activeList(), d=l[rnd(0,l.length-1)], n=pickNumber(d); cur={n,d};
+  const l=activeList(), d=l[rnd(0,l.length-1)], n=pickNumber(d); cur={n,d,label:`${n} ÷ ${d}`};
   render(`<div class="prompt">Ist diese Zahl teilbar durch <b>${d}</b>?</div>
     <div class="big">${n} <span class="div">÷ ${d}</span></div>
     <div class="row" id="ans"><button class="btn ja" data-a="1">Ja</button><button class="btn nein" data-a="0">Nein</button></div>`);
@@ -208,7 +210,7 @@ function taskAll(){
   const l=activeList(); let n;
   // Zahl mit mindestens 2 passenden Teilern bevorzugen
   for(let i=0;i<40;i++){n=rnd(12,maxN); if(l.filter(d=>n%d===0).length>=2)break}
-  cur={n};
+  cur={n,label:`Teiler von ${n}`};
   render(`<div class="prompt">Tippe <b>alle</b> Zahlen an, durch die man ${n} teilen kann.</div>
     <div class="big">${n}</div>
     <div class="picks" id="picks">${l.map(d=>`<button class="pick" data-d="${d}" aria-pressed="false">${d}</button>`).join("")}</div>
@@ -239,7 +241,7 @@ function taskGap(){
     if(sols.length>=1&&sols.length<=5)break;
   }
   const shown=digits.map((c,i)=>i===pos?`<span class="gap">?</span>`:c).join("");
-  cur={d,digits,pos,sols};
+  cur={d,digits,pos,sols,label:digits.map((c,i)=>i===pos?"?":c).join("")+" ÷ "+d};
   render(`<div class="prompt">Welche Ziffern passen für das <b>?</b>, damit die Zahl durch <b>${d}</b> teilbar ist? Tippe <b>alle</b> an.</div>
     <div class="big">${shown} <span class="div">÷ ${d}</span></div>
     <div class="picks" id="picks">${[...Array(10).keys()].map(z=>`<button class="pick" data-z="${z}" aria-pressed="false" ${pos===0&&z===0?"disabled":""}>${z}</button>`).join("")}</div>
